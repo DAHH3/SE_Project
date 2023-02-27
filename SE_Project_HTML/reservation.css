@@ -1,0 +1,87 @@
+
+/*---------------------------------General-----------------------*/
+
+html, body{
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100%;
+}
+
+p{
+    color: black;
+    text-align: center;
+}
+
+/*------------------------------Button Methods-------------------*/
+.height_center {
+    height: 50%;
+}
+.button {
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;          /*allows things like underlining. here for reference*/
+    display: inline-block;         /*makes it so button doesn't interfere with text*/
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;          /*button transition timing transition. Specifics of the transition defined elsewhere*/
+    cursor: pointer;
+}
+
+.button {
+    background-color: white;
+    color: black;
+    border: 2px solid #4CAF50;
+}
+
+.button:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.center{
+    margin: 0;
+
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+/*------------------------------Section Splitting Methods-------------------*/
+
+.header {
+    vertical-align:text-top;
+    background-color: sandybrown;
+    padding: 10px;
+    text-align: center;
+    height: 15%;
+}
+
+.mid {
+    vertical-align: text-bottom;
+    background-image: linear-gradient(sandybrown,#00b3b3, teal);
+    padding: 10px;
+    text-align: center;
+    height: 60%
+}
+
+.footer {
+    vertical-align: text-bottom;
+    background-color: teal;
+    padding: 10px;
+    text-align: center;
+    height: 15%;
+}
+
+.left-column {
+    float: left;
+    background-color: cadetblue;
+    width: 100px;
+    padding: 10px;
+    height: 100%;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
