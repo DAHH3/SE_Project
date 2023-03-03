@@ -31,6 +31,57 @@ class ReservationController extends Controller
         ]);
     }
 
+    /*
+
+    Request = {
+        date: Date
+        start_time: Time
+        end_time: Time
+    }
+    room_id = int
+
+    Request should contain a date, start_time, and end_time. Will return true if reservation is possible and false if not.
+
+    */
+    public function canMakeReservation(Request $request, $room_id) {
+        $room = Room::findOrFail($room_id);
+
+        $validator = validator()->make($request->all(), [
+            'date' => 'required|date',
+            'start_time' => 'required|time',
+            'end_time' => 'required|time'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $validated = $validator->validated();
+        $date = $validated->date;
+        $start_time = $validated->start_time;
+        $end_time = $validated->end_time;
+
+        $reservation = DB::table('reservations')
+            ->where('date', '=', $date)
+            ->orWhere(function(Builder $query) {
+                $query->where('start_time', '>=', $start_time)
+                    ->where('start_time', '<', $start_time);
+            })
+            ->orWhere(function(Builder $query) {
+                $query->where('end_time', '<=', $end_time)
+                    ->where('start_time', '>', $end_time);
+            })
+            ->where('room_id', '=', $room_id)
+            ->first();
+        
+        if ($reservation) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -40,7 +91,7 @@ class ReservationController extends Controller
     public function store(Request $request)
     {
         $validator = validator()->make($request->all(), [
-            'room_id' => 'required|integer|exits:rooms,id',
+            'room_id' => 'required|integer|exists:rooms,id',
             'email' => 'required|string',
             'date' => 'required|date',
             'start_time' => 'required|time',
@@ -60,11 +111,18 @@ class ReservationController extends Controller
         $reservation->end_time = $validated['end_time'];
         $reservation->pin = $validated['pin'];
 
-        $room = Room::find($request->room_id);
-        $reservation->room()->associate($room);
+        $open = canMakeReservation($request, $room);
 
-        $reservation->save();
-        return redirect()->route('reservationsShow', $reservation->id);
+        if ($open) {
+            $room = Room::findOrFail($request->room_id);
+            $reservation->room()->associate($room);
+
+            $reservation->save();
+            return redirect()->route('reservationsShow', $reservation->id);
+        }
+        else {
+            return redirect()->back()->withErrors('Room already reserved during that time');
+        }
     }
 
     /**
@@ -78,20 +136,6 @@ class ReservationController extends Controller
         $reservation = Reservation::findOrFail($reservation_id);
         return view('reservations.show', [
             'reservation' => $reservation
-        ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Request $request, $reservation_id)
-    {
-        return view('reservations.modify', [
-            'edit' => true,
-            'reservation' => Reservation::findOrFail($reservation_id)
         ]);
     }
 
@@ -173,13 +217,16 @@ class ReservationController extends Controller
 
         return $reservation;
     }
+
+    public function getRoomFromReservation($reservation_id) {
+        $reservation = Reservation::findOrFail($reservation_id);
+        $room = DB::table('rooms')
+            ->where('id', '=', $reservation->room_id)
+            ->first();
+        return $room;
+    }
 }
 
 /*
-
-TO ADD:
-
--> Creating reservation should NOT be allowed if one already exists for that time
--> Get room from reservation?
 
 */

@@ -37,7 +37,7 @@ class RoomController extends Controller
     }
 
     /*
-    isRoomOccupied:
+    isRoomOccupiedAtTime:
 
     Request = {
         date: Date
@@ -49,7 +49,7 @@ class RoomController extends Controller
 
     Theoretically works :)
     */
-    public function isRoomOccupied(Request $request, $room_id) {
+    public function isRoomOccupiedAtTime(Request $request, $room_id) {
         $room = Room::findOrFail($room_id);
 
         $validator = validator()->make($request->all(), [
@@ -63,7 +63,7 @@ class RoomController extends Controller
 
         $validated = $validator->validated();
         $date = $validated->date;
-        $start_time = $validated->time;
+        $time = $validated->time;
 
         $reservation = DB::table('reservations')
             ->where('date', '=', $date)
@@ -79,12 +79,69 @@ class RoomController extends Controller
             return false;
         }
     }
+
+    /*
+    POSSIBLE ARGUMENTS:
+
+    capacity: int
+    handicap_accessible: bool
+    whiteboard: bool
+    wifi: bool
+
+    */
+    public function findRooms(Request $request) {
+        $validator = validator()->make($request->all(), [
+            'capacity' => 'integer',
+            'handicap_accessible' => 'boolean',
+            'whiteboard' => 'boolean',
+            'wifi' => 'wifi'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $validated = $validator->validated();
+        $capacity = $validated->capacity;
+
+        if (!$capacity) {
+            $capacity = 0;
+        }
+
+        $handicap_accessible = $validated->handicap_accessible;
+        $whiteboard = $validated->whiteboard;
+        $wifi = $validated->wifi;
+
+        $rooms = DB::table('reservations')
+            ->where('capacity', '>=', $capacity);
+
+        if ($handicap_accessible) {
+            $rooms = $rooms->where('handicap_accessible', '=', 'true');
+        }
+
+        if ($whiteboard) {
+            $rooms = $rooms->where('whiteboard', '=', 'true');
+        }
+
+        if ($wifi) {
+            $rooms = $rooms->where('wifi', '=', 'true');
+        }
+
+        return $rooms->get();
+    }
+
+    public function getReservationsFromRoom($room_id) {
+            $room = Room::findOrFail($room_id);
+            $rooms = DB::table('reservations')
+                ->where('id', '=', $room->reservation_id)
+                ->get();
+            return $rooms;
+    }
 }
 
 /*
 
 TO ADD: 
 
--> Return rooms that match specified parameters
 
 */
