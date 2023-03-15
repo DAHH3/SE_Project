@@ -17,14 +17,19 @@
   <h2 align="center">MyBusinessName</h2>
 </div>
 
-
 <div class="mid">
-  <h1>MakeReservation</h1>
+  <h1>Available Rooms</h1>
   <br><br>
+  <form action ="reservation_form.php" method="get">
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="email" value="" required><br>
+    <br>
+    <br>
+    <label for="pin">PIN:</label>
+    <input type="text" id="pin" name="pin" value="" required><br>
+  </form>
+
   <p>
-    No content yet. Example of page layout features
-  </p>
-  <p >
     <button class = "button button" onclick="window.location.href='makeReservation.blade.php'">
       Search
     </button>
@@ -32,7 +37,7 @@
 </div>
 
 <div class = "footer">
-  <p>Footer</p>
+  <p></p>
 </div>
 
 

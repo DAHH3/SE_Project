@@ -16,32 +16,22 @@
 <div class="mid">
     <p></p>
     <br>
-    <h1 align="center">Reservation Check</h1>
+    <h1 align="center">Find Reservation</h1>
     <br>
+    <form action ="reservation_form.php" method="get">
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" value="" required><br>
+        <br>
+        <br>
+        <label for="pin">PIN:</label>
+        <input type="text" id="pin" name="pin" value="" required><br>
+    </form>
+
     <p>
-        <h2>
-            Email: <label>
-                <input type="text" name="user_email">
-            </label> <br>
-        </h2>
+        <button class = "button button" onclick="window.location.href='reservationInformation.blade.php'">
+            Find
+        </button>
     </p>
-
-
-
-    <p>
-        <h2>
-            Pin: <label>
-                <input type="text" name="user_pin">
-            </label> <br>
-        </h2>
-    </p>
-
-
-        <p >
-            <button class = "button button" onclick="window.location.href='reservationInformation.blade.php'">
-                Find
-            </button>
-        </p>
 
 </div>
 
