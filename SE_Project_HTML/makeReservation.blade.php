@@ -31,9 +31,9 @@
     <div class="right-column">
         <label for="resources">Resources Available:</label>
         <select id="resources" multiple>
-            <option value="whiteboard">Capacity</option>
-            <option value="computer">Handicap Accessible</option>
-            <option value="whiteboard">Capacity</option>            <option value="computer">Wifi</option>
+            <option value="capacity">Capacity</option>
+            <option value="accessibility">Handicap Accessible</option>
+            <option value="wifi">Wifi</option>
             <option value="whiteboard">Whiteboard</option>
 
         </select>
