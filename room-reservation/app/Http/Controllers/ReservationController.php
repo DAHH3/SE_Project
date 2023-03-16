@@ -57,9 +57,9 @@ class ReservationController extends Controller
         }
 
         $validated = $validator->validated();
-        $date = $validated->date;
-        $start_time = $validated->start_time;
-        $end_time = $validated->end_time;
+        $date = $request->date;
+        $start_time = $request->start_time;
+        $end_time = $request->end_time;
 
         $reservation = DB::table('reservations')
             ->where('date', '=', $date)
@@ -207,8 +207,8 @@ class ReservationController extends Controller
         }
 
         $validated = $validator->validated();
-        $email = $validated->email;
-        $pin = $validated->pin;
+        $email = $request->email;
+        $pin = $request->pin;
 
         $reservation = DB::table('reservations')
             ->where('email', '=', $email)

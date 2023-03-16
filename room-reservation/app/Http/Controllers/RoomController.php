@@ -62,8 +62,8 @@ class RoomController extends Controller
         }
 
         $validated = $validator->validated();
-        $date = $validated->date;
-        $time = $validated->time;
+        $date = $request->date;
+        $time = $request->time;
 
         $reservation = DB::table('reservations')
             ->where('date', '=', $date)
@@ -102,15 +102,15 @@ class RoomController extends Controller
         }
 
         $validated = $validator->validated();
-        $capacity = $validated->capacity;
+        $capacity = $request->capacity;
 
         if (!$capacity) {
             $capacity = 0;
         }
 
-        $handicap_accessible = $validated->handicap_accessible;
-        $whiteboard = $validated->whiteboard;
-        $wifi = $validated->wifi;
+        $handicap_accessible = $request->handicap_accessible;
+        $whiteboard = $request->whiteboard;
+        $wifi = $request->wifi;
 
         $rooms = DB::table('reservations')
             ->where('capacity', '>=', $capacity);
