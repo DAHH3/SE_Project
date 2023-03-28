@@ -12,7 +12,7 @@
 
 
         <div class = "header">
-            <h2 align="center">MyBusinessName</h2>
+            <h2 align="center">Continental</h2>
         </div>
 
         <div class="mid">
