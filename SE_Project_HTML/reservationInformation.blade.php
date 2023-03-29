@@ -21,10 +21,12 @@
 
 
 <div class="mid">
-  <h1 align="center" style="font-family:Lucida Handwriting;">Find Reservation</h1>
+<div style="padding-left: 35%">
+  <h1>Find Reservation</h1>
   <h3>Room: </h3>
   <h3>Date: </h3>
   <h3>Time: </h3>
+  </div>
 
   <br>
   <!--  /*TODO: Add Delete Message to delete button*/-->
