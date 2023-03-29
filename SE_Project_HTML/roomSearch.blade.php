@@ -14,7 +14,7 @@
 </div>
 
 <div class = "header">
-  <h2 align="center" style="font-size:50px;">Continental></h2>
+  <h2 align="center" style="font-size:50px;">Continental</h2>
 </div>
 
 <div class="mid">
