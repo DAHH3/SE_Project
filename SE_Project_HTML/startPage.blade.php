@@ -36,7 +36,9 @@
         <div class="mid">
             <p></p>
             <br>
-            <h1 align="center" style="font-family:Lucida Handwriting;">Welcome!</h1>
+	    <div style="padding-left: 35%">
+            <h1>Welcome!</h1>
+	    </div>
             <br>
             <p>
                 <div class = "center">
