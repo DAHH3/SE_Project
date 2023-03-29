@@ -9,21 +9,22 @@
 <body>
 
 <div class = "header">
-    <h2 align="center">MyBusinessName</h2>
+    <h2 align="center" style="font-size:50px;">Continental</h2>
 </div>
 
 
 <div class="mid">
     <p></p>
-    <br>
-    <h1 align="center">Find Reservation</h1>
+    <div style="padding-left: 35%">
+    <h1>Find Reservation</h1>
+    </div>
     <br>
     <form action ="reservation_form.php" method="get">
-        <label for="email">Email:</label>
+        <label for="email"><b>Email:</b></label><br>
         <input type="text" id="email" name="email" value="" required><br>
         <br>
         <br>
-        <label for="pin">PIN:</label>
+        <label for="pin"><b>PIN:</b></label><br>
         <input type="text" id="pin" name="pin" value="" required><br>
     </form>
 
