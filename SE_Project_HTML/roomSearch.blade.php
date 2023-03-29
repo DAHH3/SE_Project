@@ -14,11 +14,11 @@
 </div>
 
 <div class = "header">
-  <h2 align="center">MyBusinessName</h2>
+  <h2 align="center" style="font-size:50px;">Continental></h2>
 </div>
 
 <div class="mid">
-  <h1>Available Rooms</h1>
+  <h1 align="center" style="font-family:Lucida Handwriting;">Available Rooms</h1>
   <br><br>
   <form action ="reservation_form.php" method="get">
     <label for="email">Email:</label>
