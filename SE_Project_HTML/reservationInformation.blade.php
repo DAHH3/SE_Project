@@ -23,10 +23,16 @@
 <div class="mid">
 <div style="padding-left: 35%">
   <h1>Find Reservation</h1>
-  <h3>Room: </h3>
-  <h3>Date: </h3>
-  <h3>Time: </h3>
   </div>
+  <h3>Room: </h3>
+  
+   <label for="date"><b>Date:</b></label><br>
+    <input type="date" id="start" name="trip-start">
+    <br>
+    <br>
+     <label for="appt"><b>Time:</b></label><br>
+     <input type="time" id="appt" name="appt" required>
+  
 
   <br>
   <!--  /*TODO: Add Delete Message to delete button*/-->
