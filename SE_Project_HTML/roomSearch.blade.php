@@ -18,7 +18,8 @@
 </div>
 
 <div class="mid">
-  <h1 align="center" style="font-family:Lucida Handwriting;">Available Rooms</h1>
+<div style="padding-left: 32%">
+  <h1>Available Rooms</h1>
   <br><br>
   <form action ="reservation_form.php" method="get">
     <label for="email">Email:</label>
