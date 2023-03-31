@@ -28,14 +28,15 @@
 
     <div class="right-column">
         <label for="resources"><b>Resources Available:</b></label><br>
-        <select id="resources" multiple>
-            <option value="capacity">Capacity</option>
-            <option value="accessibility">Handicap Accessible</option>
-            <option value="wifi">Wifi</option>
-            <option value="whiteboard">Whiteboard</option>
-            
-
-        </select>
+        <!--TODO:Make capacity this a range-->
+            <input type="checkbox" id="capacity" value="capacity">
+            <label for="capacity">Capacity</label>
+            <input type="checkbox" id="accessibility" value="accessibility">
+            <label for="accessibility">Handicap Accessible</label>
+            <input type="checkbox" id="wifi" value="wifi">
+            <label for="wifi">Wifi</label>
+            <input type="checkbox" id="whiteboard" value="whiteboard">
+            <label for="whiteboard">Whiteboard</label>
     </div>
 
     <div style = "overflow-y:auto;">
