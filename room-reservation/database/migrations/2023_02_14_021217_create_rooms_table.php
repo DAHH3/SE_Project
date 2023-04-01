@@ -20,6 +20,7 @@ return new class extends Migration
             $table->boolean('handicap_accessible');
             $table->boolean('wifi');
             $table->boolean('whiteboard');
+            $table->integer('room_no');
         });
     }
 
