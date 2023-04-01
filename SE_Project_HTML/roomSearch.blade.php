@@ -14,21 +14,36 @@
 </div>
 
 <div class = "header">
-  <h2 align="center">MyBusinessName</h2>
+  <h2 align="center" style="font-size:50px;">Continental</h2>
 </div>
 
 <div class="mid">
+<div style="padding-left: 32%">
   <h1>Available Rooms</h1>
   <br><br>
-  <form action ="reservation_form.php" method="get">
-    <label for="email">Email:</label>
-    <input type="text" id="email" name="email" value="" required><br>
-    <br>
-    <br>
-    <label for="pin">PIN:</label>
-    <input type="text" id="pin" name="pin" value="" required><br>
-  </form>
+  @if (count($posts) == 0)
+    <p>No rooms available matching description</p>
+  @endif
+  <table>
+    <thead>
+      <tr>
+        <td>Room Number</td>
+        <!--how are we tracking availability-->
+        <td>Availability</td>
+      </tr>
+    </thead>
+    @foreach($post as $post)
+      <tbody>
+        <tr>
+          <td>{{$post->room_id}}</td>
+          <!--<td>{{$post->available}}</td>-->
+          <!--figure out how to make it so it stores the selected input-->
+          <td><form><input type="checkbox" id="select">
+            </form></td>
+        </tr>
+      </tbody>
 
+  </table>
   <p>
     <button class = "button button" onclick="window.location.href='makeReservation.blade.php'">
       Search
