@@ -5,10 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Room;
 use App\Models\Reservation;
+use App\Http\Controllers\ReservationController;
+use App\Traits\CanMakeReservation;
 use Validator;
+use DB;
 
 class RoomController extends Controller
 {
+    use CanMakeReservation;
+
     /**
      * Display a listing of the resource.
      *
@@ -20,6 +25,39 @@ class RoomController extends Controller
         return view('rooms.index', [
             'rooms' => $rooms
         ]);
+    }
+
+    public function indexAPI()
+    {
+        $rooms = Room::all();
+        return $rooms;
+    }
+
+    // ONLY FOR API
+    public function storeAPI(Request $request)
+    {
+        $validator = validator()->make($request->all(), [
+            'capacity' => 'required|integer',
+            'handicap_accessible' => 'required|boolean',
+            'wifi' => 'required|boolean',
+            'whiteboard' => 'required|boolean',
+            'room_no' => 'required|integer'
+        ]);
+
+        if ($validator->fails()) {
+            return "ERROR";
+        }
+
+        $validated = $validator->validated();
+        $room = new Room();
+        $room->capacity = $request->capacity;
+        $room->handicap_accessible = $request->handicap_accessible;
+        $room->wifi = $request->wifi;
+        $room->whiteboard = $request->whiteboard;
+
+        $room->save();
+
+        return $room;
     }
 
     /**
@@ -54,7 +92,7 @@ class RoomController extends Controller
 
         $validator = validator()->make($request->all(), [
             'date' => 'required|date',
-            'time' => 'required|time'
+            'time' => 'required|date_format:H:i'
         ]);
 
         if ($validator->fails()) {
@@ -87,6 +125,9 @@ class RoomController extends Controller
     handicap_accessible: bool
     whiteboard: bool
     wifi: bool
+    start_time: Time
+    end_time: Time
+    date: Date
 
     */
     public function findRooms(Request $request) {
@@ -94,7 +135,10 @@ class RoomController extends Controller
             'capacity' => 'integer',
             'handicap_accessible' => 'boolean',
             'whiteboard' => 'boolean',
-            'wifi' => 'wifi'
+            'wifi' => 'boolean',
+            'start_time' => 'date_format:H:i',
+            'end_time' => 'date_format:H:i',
+            'date' => 'Date'
         ]);
 
         if ($validator->fails()) {
@@ -112,36 +156,102 @@ class RoomController extends Controller
         $whiteboard = $request->whiteboard;
         $wifi = $request->wifi;
 
-        $rooms = DB::table('reservations')
+        $rooms = DB::table('rooms')
             ->where('capacity', '>=', $capacity);
 
         if ($handicap_accessible) {
-            $rooms = $rooms->where('handicap_accessible', '=', 'true');
+            $rooms = $rooms->where('handicap_accessible', '=', '1');
         }
 
         if ($whiteboard) {
-            $rooms = $rooms->where('whiteboard', '=', 'true');
+            $rooms = $rooms->where('whiteboard', '=', '1');
         }
 
         if ($wifi) {
-            $rooms = $rooms->where('wifi', '=', 'true');
+            $rooms = $rooms->where('wifi', '=', '1');
         }
 
-        return $rooms->get();
+        $rooms = $rooms->get();
+        return $rooms;
+        $availablerooms = [];
+        foreach ($rooms as $room) {
+            $open = $this->canMakeReservation($request, $room);
+            if ($open) {
+                $availablerooms.append($room);
+            }
+        }
+
+        return view('makeReservation', [
+            'rooms' => $availablerooms
+        ]);
+    }
+
+
+    public function findRoomsAPI(Request $request) {
+        $validator = validator()->make($request->all(), [
+            'capacity' => 'integer',
+            'handicap_accessible' => 'boolean',
+            'whiteboard' => 'boolean',
+            'wifi' => 'boolean',
+            'start_time' => 'date_format:H:i',
+            'end_time' => 'date_format:H:i',
+            'date' => 'Date'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $validated = $validator->validated();
+        $capacity = $request->capacity;
+
+        if (!$capacity) {
+            $capacity = 0;
+        }
+
+        $handicap_accessible = $request->handicap_accessible;
+        $whiteboard = $request->whiteboard;
+        $wifi = $request->wifi;
+
+        $rooms = DB::table('rooms')
+            ->where('capacity', '>=', $capacity);
+
+        if ($handicap_accessible) {
+            $rooms = $rooms->where('handicap_accessible', '=', '1');
+        }
+
+        if ($whiteboard) {
+            $rooms = $rooms->where('whiteboard', '=', '1');
+        }
+
+        if ($wifi) {
+            $rooms = $rooms->where('wifi', '=', '1');
+        }
+
+        $rooms = $rooms->get();
+        $availablerooms = [];
+        
+        foreach ($rooms as $room) {
+            $open = $this->canMakeReservation($request, $room->id);
+            if ($open) {
+                array_push($availablerooms, $room);
+            }
+        }
+
+        return $availablerooms;
     }
 
     public function getReservationsFromRoom($room_id) {
             $room = Room::findOrFail($room_id);
-            $rooms = DB::table('reservations')
+            $reservations = DB::table('reservations')
                 ->where('id', '=', $room->reservation_id)
                 ->get();
-            return $rooms;
+            return $reservations;
     }
 }
 
 /*
 
 TO ADD: 
-
 
 */

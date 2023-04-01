@@ -5,10 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Reservation;
 use App\Models\Room;
+use Illuminate\Database\Eloquent\Builder;
+use App\Traits\CanMakeReservation;
+use DB;
 use Validator;
 
 class ReservationController extends Controller
 {
+    use CanMakeReservation;
+
     /**
      * Display a listing of the resource.
      *
@@ -19,6 +24,12 @@ class ReservationController extends Controller
         //
     }
 
+    public function indexAPI()
+    {
+        $reservations = Reservation::all();
+        return $reservations;
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -26,60 +37,7 @@ class ReservationController extends Controller
      */
     public function create()
     {
-        return view('reservations.modify', [
-            'edit' => false
-        ]);
-    }
-
-    /*
-
-    Request = {
-        date: Date
-        start_time: Time
-        end_time: Time
-    }
-    room_id = int
-
-    Request should contain a date, start_time, and end_time. Will return true if reservation is possible and false if not.
-
-    */
-    public function canMakeReservation(Request $request, $room_id) {
-        $room = Room::findOrFail($room_id);
-
-        $validator = validator()->make($request->all(), [
-            'date' => 'required|date',
-            'start_time' => 'required|time',
-            'end_time' => 'required|time'
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-
-        $validated = $validator->validated();
-        $date = $request->date;
-        $start_time = $request->start_time;
-        $end_time = $request->end_time;
-
-        $reservation = DB::table('reservations')
-            ->where('date', '=', $date)
-            ->orWhere(function(Builder $query) {
-                $query->where('start_time', '>=', $start_time)
-                    ->where('start_time', '<', $start_time);
-            })
-            ->orWhere(function(Builder $query) {
-                $query->where('end_time', '<=', $end_time)
-                    ->where('start_time', '>', $end_time);
-            })
-            ->where('room_id', '=', $room_id)
-            ->first();
-        
-        if ($reservation) {
-            return false;
-        }
-        else {
-            return true;
-        }
+        return view('makeReservation');
     }
 
     /**
@@ -88,19 +46,19 @@ class ReservationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $room_id)
     {
         $validator = validator()->make($request->all(), [
             'room_id' => 'required|integer|exists:rooms,id',
             'email' => 'required|string',
             'date' => 'required|date',
-            'start_time' => 'required|time',
-            'end_time' => 'required|time',
+            'start_time' => 'required|date_format:H:i',
+            'end_time' => 'required|date_format:H:i',
             'pin' => 'required|string'
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
+            return $validator->errors();
         }
 
         $validated = $validator->validated();
@@ -111,17 +69,64 @@ class ReservationController extends Controller
         $reservation->end_time = $validated['end_time'];
         $reservation->pin = $validated['pin'];
 
-        $open = canMakeReservation($request, $room);
+        $open = $this->canMakeReservation($request, $request->room_id);
 
         if ($open) {
+
             $room = Room::findOrFail($request->room_id);
+
+            if (!$room) {
+                return 'Room does not exist';
+            }
             $reservation->room()->associate($room);
 
             $reservation->save();
-            return redirect()->route('reservationsShow', $reservation->id);
+            return redirect()->route('reservationShow', $reservation->id);
         }
         else {
             return redirect()->back()->withErrors('Room already reserved during that time');
+        }
+    }
+
+    public function storeAPI(Request $request)
+    {
+        $validator = validator()->make($request->all(), [
+            'room_id' => 'required|integer|exists:rooms,id',
+            'email' => 'required|string',
+            'date' => 'required|date',
+            'start_time' => 'required|date_format:H:i',
+            'end_time' => 'required|date_format:H:i',
+            'pin' => 'required|string'
+        ]);
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        }
+
+        $validated = $validator->validated();
+        $reservation = new Reservation();
+        $reservation->email = $validated['email'];
+        $reservation->date = $validated['date'];
+        $reservation->start_time = $validated['start_time'];
+        $reservation->end_time = $validated['end_time'];
+        $reservation->pin = $validated['pin'];
+
+        $open = $this->canMakeReservation($request, $request->room_id);
+
+        if ($open) {
+
+            $room = Room::findOrFail($request->room_id);
+
+            if (!$room) {
+                return 'Room does not exist';
+            }
+            $reservation->room()->associate($room);
+
+            $reservation->save();
+            return $reservation;
+        }
+        else {
+            return 'Room already reserved during that time';
         }
     }
 
@@ -134,7 +139,7 @@ class ReservationController extends Controller
     public function show($reservation_id)
     {
         $reservation = Reservation::findOrFail($reservation_id);
-        return view('reservations.show', [
+        return view('reservationInformation', [
             'reservation' => $reservation
         ]);
     }
@@ -196,7 +201,40 @@ class ReservationController extends Controller
         return redirect()->route('roomsIndex');
     }
 
+    public function destroyAPI(Request $request, $reservation_id)
+    {
+        $reservation = Reservation::findOrFail($reservation_id);
+        $reservation->room()->dissociate();
+        $reservation->delete();
+
+        return 'Deleted!';
+    }
+
     public function findReservation(Request $request) {
+        $validator = validator()->make($request->all(), [
+            'email' => 'required|string',
+            'pin' => 'required|string'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $validated = $validator->validated();
+        $email = $request->email;
+        $pin = $request->pin;
+
+        $reservation = DB::table('reservations')
+            ->where('email', '=', $email)
+            ->where('pin', '=', $pin)
+            ->first();
+
+        return view('reservationInformation', [
+            'reservation' => $reservation
+        ]);
+    }
+
+    public function findReservationAPI(Request $request) {
         $validator = validator()->make($request->all(), [
             'email' => 'required|string',
             'pin' => 'required|string'

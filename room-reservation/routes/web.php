@@ -15,30 +15,28 @@ use App\Http\Controllers\RoomController;
 |
 */
 
-//TODO: FILL IN NAMES WITH NAMES OF BLADE FILES
-
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('startPage');
+})->name('startPage');
 
-Route::get('/reservations/search', function() {
-    return view('NAME HERE');
-});
+Route::get('/reservations', function() {
+    return view('findReservation');
+})->name('findReservationPage');
 
-Route::get('/rooms/search', function() {
-    return view('NAME HERE');
-});
+Route::get('/rooms', function() {
+    return view('roomSearch');
+})->name('roomSearchPage');
 
-Route::post('/reservations/search', [ReservationController::class, 'findReservation']);
+Route::post('/reservations/search', [ReservationController::class, 'findReservation'])->name('findReservation');
 
-Route::post('/reservations', [ReservationController::class, 'store']);
+Route::post('/rooms/{room_id}/reservations', [ReservationController::class, 'store'])->name('makeReservation');
 
-Route::get('/reservations/create', [ReservationController::class, 'create']);
+Route::get('/reservations/create', [ReservationController::class, 'create'])->name('makeReservation');
 
-Route::get('/{reservation_id}', [ReservationController::class, 'show']);
+Route::get('/reservations/{reservation_id}', [ReservationController::class, 'show'])->name('reservationShow');
 
-Route::delete('/{reservation_id}', [ReservationController::class, 'destroy']);
+Route::delete('/{reservation_id}', [ReservationController::class, 'destroy'])->name('deleteReservation');
 
-Route::post('/rooms/search', [RoomController::class, 'findRooms']);
+Route::post('/rooms/search', [RoomController::class, 'findRooms'])->name('roomSearch');
 
 
