@@ -5,57 +5,70 @@
     <meta name="view" content = "width=device-width, initial-scale=1">
     <title>Make Reservation</title>
     <link rel="stylesheet" href="../../css/reservation.css">
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
 </head>
 <body>
 
 <div class = "header">
-    <h2 align="center" style="font-size:50px;">Continental</h2>
+    <h1>The Continental Library</h1>
 </div>
 
 
-<div class="mid">
-    <p></p>
-    <div style="padding-left: 35%">
-    <h1>Make Reservation</h1>
-    </div>
+<div class="body">
+    <h2>Make Reservation</h2>
 
-    <div>
-            <h3>Room {{ $room->id }}</h3>
-            <hr>
-            <p>Capacity: {{ $room->capacity }}</p>
+    <div class="container">
+        <table>
+            <tr>
+                <th>Room {{ $room->id }}</th>
+            </tr>
+            <tr>
+                <td>Capacity: {{ $room->capacity }}</td>
+            </tr>
             @if ($room->wifi)
-                <p>Wifi Access</p>
+                <tr>
+                    <td>&#10003; Wifi Access</td>
+                </tr>
             @endif
             @if ($room->handicap_accessible)
-                <p>Handicap Accessible</p>
+                <tr>
+                    <td>&#10003; Handicap Accessible</td>
+                </tr>
             @endif
             @if ($room->whiteboard)
-                <p>Whiteboard Available
+                <tr>
+                    <td>&#10003; Whiteboard Available</td>
+                </tr>
             @endif
-        </div>
+        </table>
+    </div>
 
-    <br>
   <form action ="/reservations" method="post">
     @csrf
     <input type="hidden" name="room_id" value="{{ $room->id }}">
     <input type="hidden" name="date" value="{{ $date }}">
     <input type="hidden" name="start_time" value="{{ $start_time }}">
     <input type="hidden" name="end_time" value="{{ $end_time }}">
-    <label for="email">Email:</label>
-    <input type="text" id="email" name="email" value="" required><br>
-    <br>
-    <br>
-    <label for="pin">PIN:</label>
-    <input type="text" id="pin" name="pin" value="" required><br>
+
+
+    <table>
+        <tr>
+            <td>
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email" value="" required>
+            </td>
+            <td>
+                <label for="pin">PIN:</label>
+                <input type="text" id="pin" name="pin" value="" required>
+            </td>
+        </tr>
+    </table>
+
     <button class = "button button" type="submit">
       Create
     </button>
   </form>
 
-</div>
-
-<div class = "footer">
-    <p></p>
 </div>
 
 </body>

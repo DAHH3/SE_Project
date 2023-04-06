@@ -3,38 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="view" content = "width=device-width, initial-scale=1">
-    <title>findReservation</title>
+    <title>Find Reservation</title>
     <link rel="stylesheet" href="../../css/reservation.css">
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
 </head>
 <body>
 
 <div class = "header">
-    <h2 align="center" style="font-size:50px;">Continental</h2>
+    <h1>The Continental Library</h1>
 </div>
 
-<div class="mid">
-    <p></p>
-    <div style="padding-left: 35%">
-    <h1>Find Reservation</h1>
-    </div>
-    <br>
+<div class="body">
+    <h2>Find Reservation</h2>
     <form action ="/reservations/search" method="post">
         @csrf
-        <label for="email">Email:</label>
-        <input type="text" id="email" name="email" value="" required><br>
-        <br>
-        <br>
-        <label for="pin">PIN:</label>
-        <input type="text" id="pin" name="pin" value="" required><br>
+        <table>
+            <tr>
+                <td>
+                    <label for="email">Email:</label>
+                </td>
+                <td>
+                    <input type="text" id="email" name="email" value="" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="pin">PIN:</label>
+                </td>
+                <td>
+                    <input type="text" id="pin" name="pin" value="" required>
+                </td>
+            </tr>
+        </table>
+
         <button class = "button button" type="submit">
             Find
         </button>
     </form>
 
-</div>
-
-<div class = "footer">
-    <p></p>
 </div>
 
 </body>

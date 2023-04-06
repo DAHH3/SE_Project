@@ -6,6 +6,7 @@
         <meta name="view" content = "width=device-width, initial-scale=1">
         <title>Home</title>
         <link rel="stylesheet" href="../../css/reservation.css">
+        <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
     </head>
     
  <style>
@@ -23,23 +24,17 @@
 
 
         <div class = "header">
-            <h2 align="center" style="font-size:50px;">Continental</h2>
+            <h1>The Continental Library</h1>
         </div>
 
-        <div class="mid">
-	    <h1>Welcome!</h1>
-                <div class = "center">
-                    <button class = "button button" onclick="window.location.href = `{{ route('roomSearchPage') }} `">
-                    MAKE A RESERVATION
-                    </button>
-                    <button class = "button button" onclick="window.location.href =` {{ route('findReservationPage') }} `">
-                    VIEW EXISTING RESERVATION
-                    </button>
-                </div>
-        </div>
-
-        <div class = "footer">
-            <p></p>
+        <div class="body">
+	        <h2>Welcome!</h2>
+            <button class = "button button" onclick="window.location.href = `{{ route('roomSearchPage') }} `">
+                MAKE RESERVATION
+            </button>
+            <button class = "button button" onclick="window.location.href =` {{ route('findReservationPage') }} `">
+                FIND RESERVATION
+            </button>
         </div>
 
     </body>
