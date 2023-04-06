@@ -39,10 +39,8 @@ p{
 }
 
 .center{
-    margin: 0;
-
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
+    margin: auto;
+    width: 50%;
 }
 
 /*------------------------------Section Splitting Methods-------------------*/
@@ -60,7 +58,7 @@ p{
     background-image: linear-gradient(sandybrown,#00b3b3, teal);
     padding: 10px;
     text-align: center;
-    height: 60%
+    height: 60%;
 }
 
 .footer {
@@ -73,10 +71,16 @@ p{
 
 .left-column {
     float: left;
-    background-color: cadetblue;
-    width: 100px;
     padding: 10px;
     height: 100%;
+    text-align: left;
+}
+
+.right-column {
+    float: right;
+    padding: 10px;
+    height: 100%;
+    text-align: left;
 }
 
 .row:after {
@@ -85,8 +89,17 @@ p{
     clear: both;
 }
 
-table, th, td{
-    border:1px solid black;
-
+table, td{
+    padding: 5px;
+    text-align: left;
+    border: 1px solid black;
 }
 
+th {
+    text-align: center;
+}
+
+table {
+    width: 500px;
+    margin: auto;
+}

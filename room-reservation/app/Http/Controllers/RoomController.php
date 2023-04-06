@@ -131,6 +131,7 @@ class RoomController extends Controller
 
     */
     public function findRooms(Request $request) {
+        // return view('welcome');
         $validator = validator()->make($request->all(), [
             'capacity' => 'integer',
             'handicap_accessible' => 'boolean',
@@ -172,17 +173,19 @@ class RoomController extends Controller
         }
 
         $rooms = $rooms->get();
-        return $rooms;
         $availablerooms = [];
         foreach ($rooms as $room) {
-            $open = $this->canMakeReservation($request, $room);
+            $open = $this->canMakeReservation($request, $room->id);
             if ($open) {
-                $availablerooms.append($room);
+                array_push($availablerooms, $room);
             }
         }
 
-        return view('makeReservation', [
-            'rooms' => $availablerooms
+        return view('roomSelect', [
+            'rooms' => $availablerooms,
+            'date' => $request->date,
+            'start_time' => $request->start_time,
+            'end_time' => $request->end_time
         ]);
     }
 
