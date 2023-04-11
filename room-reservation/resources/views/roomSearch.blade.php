@@ -3,74 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="view" content = "width=device-width, initial-scale=1">
-    <title>Make Reservation</title>
-    <link rel="stylesheet" href=" {{ asset('/css/reservation.css') }} ">
+    <title>Room Search</title>
+    <link rel="stylesheet" href="../../css/reservation.css">
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
 </head>
+
 <body>
-<div class="left-column">
-    <p>
-    </p>
-</div>
 
 <div class = "header">
-    <h2 align="center">MyBusinessName</h2>
+    <h1>The Continental Library</h1>
 </div>
 
 
-<div class="mid">
-    <div style="padding-left: 45%">
-        <h1>Make a Reservation</h1>
-    </div>
-    <br><br>
-    <p>
-
-    </p>
-
-
-    <div class="right-column">
-        <label for="resources">Resources Available:</label>
-        <select id="resources" multiple>
-            <option value="capacity">Capacity</option>
-            <option value="accessibility">Handicap Accessible</option>
-            <option value="wifi">Wifi</option>
-            <option value="whiteboard">Whiteboard</option>
-
-        </select>
-    </div>
-
-    <div style = "overflow-y:auto;">
-
-        <form action ="route('roomSearch')" method="post">
-            @csrf
-            <label for="email">Email:</label>
-            <input type="text" id="email" name="email" value="" required><br>
-            <br>
-            <br>
-
-            <label for="start_time">Start date and time:</label><br>
-            <input type="datetime-local" id="start_time" name="start_time" required/>
-            <br>
-            <br>
-            <br>
-            <label for="end_time">End date and time:</label><br>
-            <input type="datetime-local" id="end_time" name="end_time" required/>
-            <br>
-            <br>
-            <br>
-        </form>
-        <div style="padding-left: 50%">
-
-            <button class = "button button" type="submit">
-                Submit
-            </button>
-        </div>
-    </div>
-</div>
-
-<div class = "footer">
-    <p></p>
+<div class="body">
+    <h2>Search Rooms</h2>
+    
+    <form action ="/rooms/search" method="post">
+        @csrf
+        <table class="container">
+            <tr>
+                <th>Requirements</th>
+                <th>Date/Time</th>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" id="handicap_accessible" value="handicap_accessible" name="handicap_accessible">
+                    <label for="handicap_accessible">Handicap Accessible</label>
+                </td>
+                <td>
+                    <label for="date">Date:</label>
+                    <input type="date" id="date" name="date" required />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" id="wifi" value="wifi" name="wifi">
+                    <label for="wifi">Wifi</label>
+                </td>
+                <td>
+                    <label for="start_time">Start Time:</label>
+                    <input type="time" id="start_time" name="start_time" required />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" id="whiteboard" value="whiteboard" name="whiteboard">
+                    <label for="whiteboard">Whiteboard</label><br><br>
+                </td>
+                <td>
+                    <label for="end_time">End Time:</label>
+                    <input type="time" id="end_time" name="end_time" required />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="number" id="capacity" value="capacity" min="1" max="15" name="capacity">
+                    <label for="capacity">Capacity</label>
+                </td>
+            </tr>
+        </table>
+        <button class = "button button" type="submit">
+            Submit
+        </button>
+    </form>
 </div>
 
 
 </body>
 </html>
+

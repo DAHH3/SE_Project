@@ -3,41 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="view" content = "width=device-width, initial-scale=1">
-    <title>findReservation</title>
-    <link rel="stylesheet" href=" {{ asset('/css/reservation.css') }} ">
+    <title>Find Reservation</title>
+    <link rel="stylesheet" href="../../css/reservation.css">
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
 </head>
 <body>
 
 <div class = "header">
-    <h2 align="center">MyBusinessName</h2>
+    <h1>The Continental Library</h1>
 </div>
 
-
-<div class="mid">
-    <p></p>
-    <br>
-    <h1 align="center">Find Reservation</h1>
-    <br>
-    <form action ="route('findReservation')" method="post">
+<div class="body">
+    <h2>Find Reservation</h2>
+    <form action ="/reservations/search" method="post">
         @csrf
-        <label for="email">Email:</label>
-        <input type="text" id="email" name="email" value="" required><br>
-        <br>
-        <br>
-        <label for="pin">PIN:</label>
-        <input type="text" id="pin" name="pin" value="" required><br>
-    </form>
+        <table>
+            <tr>
+                <td>
+                    <label for="email">Email:</label>
+                </td>
+                <td>
+                    <input type="text" id="email" name="email" value="" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="pin">PIN:</label>
+                </td>
+                <td>
+                    <input type="text" id="pin" name="pin" value="" required>
+                </td>
+            </tr>
+        </table>
 
-    <p>
         <button class = "button button" type="submit">
             Find
         </button>
-    </p>
+    </form>
 
-</div>
-
-<div class = "footer">
-    <p></p>
 </div>
 
 </body>

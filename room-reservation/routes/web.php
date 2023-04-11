@@ -29,14 +29,15 @@ Route::get('/rooms', function() {
 
 Route::post('/reservations/search', [ReservationController::class, 'findReservation'])->name('findReservation');
 
-Route::post('/rooms/{room_id}/reservations', [ReservationController::class, 'store'])->name('makeReservation');
+Route::post('reservations', [ReservationController::class, 'store'])->name('makeReservation');
 
-Route::get('/reservations/create', [ReservationController::class, 'create'])->name('makeReservation');
+Route::post('/reservations/create', [ReservationController::class, 'create'])->name('makeReservation');
 
 Route::get('/reservations/{reservation_id}', [ReservationController::class, 'show'])->name('reservationShow');
 
-Route::delete('/{reservation_id}', [ReservationController::class, 'destroy'])->name('deleteReservation');
+Route::post('/reservations/delete', [ReservationController::class, 'destroy'])->name('deleteReservation');
 
 Route::post('/rooms/search', [RoomController::class, 'findRooms'])->name('roomSearch');
+
 
 

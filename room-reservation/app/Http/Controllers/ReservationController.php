@@ -35,9 +35,15 @@ class ReservationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('makeReservation');
+        $room = Room::findOrFail($request->room_id);
+        return view('makeReservation', [
+            'room' => $room,
+            'date' => $request->date,
+            'start_time' => $request->start_time,
+            'end_time' => $request->end_time
+        ]);
     }
 
     /**
@@ -46,7 +52,7 @@ class ReservationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $room_id)
+    public function store(Request $request)
     {
         $validator = validator()->make($request->all(), [
             'room_id' => 'required|integer|exists:rooms,id',
@@ -192,13 +198,13 @@ class ReservationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $reservation_id)
+    public function destroy(Request $request)
     {
-        $reservation = Reservation::findOrFail($reservation_id);
+        $reservation = Reservation::findOrFail($request->reservation_id);
         $reservation->room()->dissociate();
         $reservation->delete();
 
-        return redirect()->route('roomsIndex');
+        return view('startPage');
     }
 
     public function destroyAPI(Request $request, $reservation_id)
@@ -211,6 +217,7 @@ class ReservationController extends Controller
     }
 
     public function findReservation(Request $request) {
+
         $validator = validator()->make($request->all(), [
             'email' => 'required|string',
             'pin' => 'required|string'

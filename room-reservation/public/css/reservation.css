@@ -4,9 +4,17 @@
 html, body{
     font-family: Arial, Helvetica, sans-serif;
     height: 100%;
+    background-color: #c4e3e3;
 }
 
-p{
+h1 {
+    font-family: 'Lato';
+    font-size: 50px;
+    line-height: 50%;
+    text-align: center;
+}
+
+p {
     color: black;
     text-align: center;
 }
@@ -30,29 +38,31 @@ p{
 .button {
     background-color: white;
     color: black;
-    border: 2px solid #4CAF50;
+    border: 2px solid sandybrown;
 }
 
 .button:hover {
-    background-color: #4CAF50;
+    background-color: sandybrown;
     color: white;
 }
 
 .center{
-    margin: 0;
-
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
+    margin: auto;
+    width: 50%;
 }
 
 /*------------------------------Section Splitting Methods-------------------*/
 
 .header {
-    vertical-align:text-top;
-    background-color: sandybrown;
-    padding: 10px;
-    text-align: center;
+    background-color: teal;
+    padding: 0px;
+    line-height: 15%;
     height: 15%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    margin: 0px;
+    width: 100%;
 }
 
 .mid {
@@ -60,7 +70,13 @@ p{
     background-image: linear-gradient(sandybrown,#00b3b3, teal);
     padding: 10px;
     text-align: center;
-    height: 60%
+    height: 60%;
+}
+
+.body {
+    margin-top: 100px;
+    border: 2px solid transparent;
+    text-align: center;
 }
 
 .footer {
@@ -71,22 +87,37 @@ p{
     height: 15%;
 }
 
-.left-column {
-    float: left;
-    background-color: cadetblue;
-    width: 100px;
-    padding: 10px;
-    height: 100%;
-}
-
 .row:after {
     content: "";
     display: table;
     clear: both;
 }
 
-table, th, td{
-    border:1px solid black;
-
+table, td{
+    padding: 5px;
+    text-align: left;
+    border: 0px solid black;
 }
 
+th {
+    text-align: center;
+    border-bottom: 2px solid teal;
+}
+
+table {
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+.container {
+    background-color: white;
+    border: 2px solid teal;
+    width: 500px;
+    margin: auto;
+    margin-bottom: 20px;
+    padding: 10px;
+}
