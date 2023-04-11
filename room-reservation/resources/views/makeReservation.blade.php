@@ -18,6 +18,26 @@
     <h2>Make Reservation</h2>
 
     <div class="container">
+      <table>
+        <tr>
+          <th colspan="2">Reservation</th>
+        </tr>
+        <tr>
+          <td>Room:</td>
+          <td>{{$room->id}}</td>
+        </tr>
+        <tr>
+          <td>Date:</td>
+          <td>{{$date}}</td>
+        </tr>
+        <tr>
+          <td>Time:</td>
+          <td>{{$start_time}} to {{$end_time}}</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="container">
         <table>
             <tr>
                 <th>Room {{ $room->id }}</th>
@@ -49,8 +69,6 @@
     <input type="hidden" name="date" value="{{ $date }}">
     <input type="hidden" name="start_time" value="{{ $start_time }}">
     <input type="hidden" name="end_time" value="{{ $end_time }}">
-
-
     <table>
         <tr>
             <td>

@@ -40,3 +40,4 @@ Route::post('/reservations/delete', [ReservationController::class, 'destroy'])->
 Route::post('/rooms/search', [RoomController::class, 'findRooms'])->name('roomSearch');
 
 
+
