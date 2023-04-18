@@ -1,20 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="view" content = "width=device-width, initial-scale=1">
-    <title>Make Reservation</title>
-    <link rel="stylesheet" href="../../css/reservation.css">
-    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
-</head>
-<body>
+@extends('layout')
 
-<div class = "header">
-    <h1>The Continental Library</h1>
-</div>
-
-
-<div class="body">
+@section('content')
     <h2>Make Reservation</h2>
 
     <div class="container">
@@ -86,8 +72,5 @@
       Create
     </button>
   </form>
-
-</div>
-
-</body>
-</html>
+  
+@endsection

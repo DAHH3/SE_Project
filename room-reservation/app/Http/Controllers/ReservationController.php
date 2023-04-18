@@ -64,7 +64,7 @@ class ReservationController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return $validator->errors();
+            return redirect()->back()->withErrors($validator)->withInput();
         }
 
         $validated = $validator->validated();

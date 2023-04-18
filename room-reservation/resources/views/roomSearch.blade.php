@@ -1,22 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="view" content = "width=device-width, initial-scale=1">
-    <title>Room Search</title>
-    <link rel="stylesheet" href="../../css/reservation.css">
-    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
-</head>
+@extends('layout')
 
-<body>
-
-<div class = "header">
-    <h1>The Continental Library</h1>
-</div>
-
-
-<div class="body">
+@section('content')
     <h2>Search Rooms</h2>
+
+    @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
     
     <form action ="/rooms/search" method="post">
         @csrf
@@ -66,9 +55,4 @@
             Submit
         </button>
     </form>
-</div>
-
-
-</body>
-</html>
-
+@endsection

@@ -121,3 +121,8 @@ form {
     margin-bottom: 20px;
     padding: 10px;
 }
+
+a {
+    text-decoration: none;
+    color: black;
+}

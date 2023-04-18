@@ -133,7 +133,7 @@ class RoomController extends Controller
     public function findRooms(Request $request) {
         // return view('welcome');
         $validator = validator()->make($request->all(), [
-            'capacity' => 'integer',
+            'capacity' => 'integer|nullable',
             'handicap_accessible' => 'boolean',
             'whiteboard' => 'boolean',
             'wifi' => 'boolean',
@@ -144,6 +144,10 @@ class RoomController extends Controller
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        if ($request->start_time >= $request->end_time) {
+            return redirect()->back()->withErrors()->withInput();
         }
 
         $validated = $validator->validated();
