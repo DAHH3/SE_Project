@@ -99,6 +99,10 @@ table, td{
     border: 0px solid black;
 }
 
+td {
+    vertical-align: top;
+}
+
 th {
     text-align: center;
     border-bottom: 2px solid teal;
@@ -127,7 +131,13 @@ a {
     color: black;
 }
 
+/*------------------------------ Error Validation -------------------*/
+
 .error-message {
     color: red;
     font-size: 10px;
+}
+
+.error-field {
+    border: 1px solid red;
 }

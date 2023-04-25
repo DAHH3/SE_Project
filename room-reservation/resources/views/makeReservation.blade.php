@@ -59,21 +59,17 @@
         <tr>
             <td>
                 <label for="email">Email:</label>
-                <input type="text" id="email" name="email" value="" required>
+                <input class="@error('email') error-field @enderror" type="text" id="email" name="email" value="" required>
+                @error('email')
+                  <br><span class="error-message" role="alert">
+                    {{ $message }} 
+                  </span>
+                @enderror
             </td>
             <td>
                 <label for="pin">PIN:</label>
                 <input type="text" id="pin" name="pin" value="" required>
             </td>
-        </tr>
-        <tr>
-          <td>
-            @error('email')
-              <span class="error-message" role="alert">
-                {{ $message }} 
-              </span>
-            @enderror
-          </td>
         </tr>
     </table>
 
