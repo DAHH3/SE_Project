@@ -2,7 +2,7 @@
 
 @section('content')
     <h2>Find Reservation</h2>
-    <form action ="/reservations/search" method="post">
+    <form action ="reservations/search" method="post">
         @csrf
         <table>
             <tr>

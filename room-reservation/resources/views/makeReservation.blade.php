@@ -66,6 +66,15 @@
                 <input type="text" id="pin" name="pin" value="" required>
             </td>
         </tr>
+        <tr>
+          <td>
+            @error('email')
+              <span class="error-message" role="alert">
+                {{ $message }} 
+              </span>
+            @enderror
+          </td>
+        </tr>
     </table>
 
     <button class = "button button" type="submit">

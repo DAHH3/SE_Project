@@ -3,10 +3,6 @@
 @section('content')
     <h2>Search Rooms</h2>
 
-    @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-    
     <form action ="/rooms/search" method="post">
         @csrf
         <table class="container">
@@ -22,6 +18,11 @@
                 <td>
                     <label for="date">Date:</label>
                     <input type="date" id="date" name="date" required />
+                    @error('date')
+                        <br><span class="error-message" role="alert">
+                                {{ $message }} 
+                        </span>
+                    @enderror
                 </td>
             </tr>
             <tr>
@@ -42,6 +43,11 @@
                 <td>
                     <label for="end_time">End Time:</label>
                     <input type="time" id="end_time" name="end_time" required />
+                    @error('end_time')
+                        <br><span class="error-message" role="alert">
+                                {{ $message }} 
+                        </span>
+                    @enderror
                 </td>
             </tr>
             <tr>

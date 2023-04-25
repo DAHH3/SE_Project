@@ -132,22 +132,24 @@ class RoomController extends Controller
     */
     public function findRooms(Request $request) {
         // return view('welcome');
-        $validator = validator()->make($request->all(), [
+        $validator = validator()->make($request->all(), 
+        [
             'capacity' => 'integer|nullable',
             'handicap_accessible' => 'boolean',
             'whiteboard' => 'boolean',
             'wifi' => 'boolean',
             'start_time' => 'date_format:H:i',
-            'end_time' => 'date_format:H:i',
-            'date' => 'Date'
+            'end_time' => 'date_format:H:i|after:start_time',
+            'date' => 'Date|after:yesterday'
+        ],
+        [
+            'date.after' => 'This date has already passed.',
+            'end_time.after' => 'The end time must be after the start time.'
+
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
-        }
-
-        if ($request->start_time >= $request->end_time) {
-            return redirect()->back()->withErrors()->withInput();
         }
 
         $validated = $validator->validated();

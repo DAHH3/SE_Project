@@ -56,15 +56,22 @@ class ReservationController extends Controller
     {
         $validator = validator()->make($request->all(), [
             'room_id' => 'required|integer|exists:rooms,id',
-            'email' => 'required|string',
+            'email' => 'required|email',
             'date' => 'required|date',
             'start_time' => 'required|date_format:H:i',
-            'end_time' => 'required|date_format:H:i',
+            'end_time' => 'required|date_format:H:i|after:start_time',
             'pin' => 'required|string'
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
+            // return route('startPage');
+            $room = Room::findOrFail($request->room_id);
+            return view('makeReservation', [
+                'room' => $room,
+                'date' => $request->date,
+                'start_time' => $request->start_time,
+                'end_time' => $request->end_time
+            ])->withErrors($validator);
         }
 
         $validated = $validator->validated();
