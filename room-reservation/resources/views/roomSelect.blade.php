@@ -7,7 +7,7 @@
         <p>There were no rooms matching your search.</p>
     @endif
     @foreach($rooms as $room)
-        <form action ="/reservations/create" method="post" class="container">
+        <form action ="../reservations/create" method="post" class="container">
         @csrf
             <input type="hidden" name="room_id" value="{{ $room->id}} ">
             <input type="hidden" name="date" value="{{ $date }}">

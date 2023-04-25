@@ -49,7 +49,7 @@
         </table>
     </div>
 
-  <form action ="/reservations" method="post">
+  <form action ="../reservations" method="post">
     @csrf
     <input type="hidden" name="room_id" value="{{ $room->id }}">
     <input type="hidden" name="date" value="{{ $date }}">

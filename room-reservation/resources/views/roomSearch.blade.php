@@ -3,7 +3,7 @@
 @section('content')
     <h2>Search Rooms</h2>
 
-    <form action ="/rooms/search" method="post">
+    <form action ="rooms/search" method="post">
         @csrf
         <table class="container">
             <tr>
