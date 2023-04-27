@@ -56,15 +56,22 @@ class ReservationController extends Controller
     {
         $validator = validator()->make($request->all(), [
             'room_id' => 'required|integer|exists:rooms,id',
-            'email' => 'required|string',
+            'email' => 'required|email',
             'date' => 'required|date',
             'start_time' => 'required|date_format:H:i',
-            'end_time' => 'required|date_format:H:i',
+            'end_time' => 'required|date_format:H:i|after:start_time',
             'pin' => 'required|string'
         ]);
 
         if ($validator->fails()) {
-            return $validator->errors();
+            // return route('startPage');
+            $room = Room::findOrFail($request->room_id);
+            return view('makeReservation', [
+                'room' => $room,
+                'date' => $request->date,
+                'start_time' => $request->start_time,
+                'end_time' => $request->end_time
+            ])->withErrors($validator);
         }
 
         $validated = $validator->validated();
@@ -87,7 +94,11 @@ class ReservationController extends Controller
             $reservation->room()->associate($room);
 
             $reservation->save();
-            return redirect()->route('reservationShow', $reservation->id);
+            return view('reservationInformation', [
+                'reservation' => $reservation,
+                'room_no' => $room->room_no
+            ]);
+            // return redirect()->route('reservationShow', [$reservation->id, ]);
         }
         else {
             return redirect()->back()->withErrors('Room already reserved during that time');
@@ -235,9 +246,20 @@ class ReservationController extends Controller
             ->where('email', '=', $email)
             ->where('pin', '=', $pin)
             ->first();
+        
+        if ($reservation) {
+            $room = DB::table('rooms')
+            ->where('id', '=', $reservation->room_id)
+            ->first();
+            $room_no = $room->room_no;
+        }
+        else {
+            $room_no = 0;
+        }
 
         return view('reservationInformation', [
-            'reservation' => $reservation
+            'reservation' => $reservation,
+            'room_no' => $room_no
         ]);
     }
 

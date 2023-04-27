@@ -1,21 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="view" content = "width=device-width, initial-scale=1">
-    <title>Find Reservation</title>
-    <link rel="stylesheet" href="../../css/reservation.css">
-    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
-</head>
-<body>
+@extends('layout')
 
-<div class = "header">
-    <h1>The Continental Library</h1>
-</div>
-
-<div class="body">
+@section('content')
     <h2>Find Reservation</h2>
-    <form action ="/reservations/search" method="post">
+    <form action ="reservations/search" method="post">
         @csrf
         <table>
             <tr>
@@ -40,8 +27,4 @@
             Find
         </button>
     </form>
-
-</div>
-
-</body>
-</html>
+@endsection

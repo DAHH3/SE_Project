@@ -1,24 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="view" content = "width=device-width, initial-scale=1">
-    <title>Room Search</title>
-    <link rel="stylesheet" href="../../css/reservation.css">
-    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
-</head>
+@extends('layout')
 
-<body>
-
-<div class = "header">
-    <h1>The Continental Library</h1>
-</div>
-
-
-<div class="body">
+@section('content')
     <h2>Search Rooms</h2>
-    
-    <form action ="/rooms/search" method="post">
+
+    <form action ="rooms/search" method="post">
         @csrf
         <table class="container">
             <tr>
@@ -32,7 +17,12 @@
                 </td>
                 <td>
                     <label for="date">Date:</label>
-                    <input type="date" id="date" name="date" required />
+                    <input class="@error('date') error-field @enderror" type="date" id="date" name="date" required />
+                    @error('date')
+                        <br><span class="error-message" role="alert">
+                                {{ $message }} 
+                        </span>
+                    @enderror
                 </td>
             </tr>
             <tr>
@@ -46,13 +36,20 @@
                 </td>
             </tr>
             <tr>
+            </tr>
+            <tr>
                 <td>
                     <input type="checkbox" id="whiteboard" value="whiteboard" name="whiteboard">
                     <label for="whiteboard">Whiteboard</label><br><br>
                 </td>
                 <td>
                     <label for="end_time">End Time:</label>
-                    <input type="time" id="end_time" name="end_time" required />
+                    <input class="@error('end_time') error-field @enderror" type="time" id="end_time" name="end_time" required />
+                    @error('end_time')
+                        <br><span class="error-message" role="alert">
+                                {{ $message }} 
+                        </span>
+                    @enderror
                 </td>
             </tr>
             <tr>
@@ -66,9 +63,4 @@
             Submit
         </button>
     </form>
-</div>
-
-
-</body>
-</html>
-
+@endsection

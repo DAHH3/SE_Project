@@ -1,28 +1,6 @@
 @extends('layout')
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="view" content = "width=device-width, initial-scale=1">
-  <title>Reservation Information</title>
-  <link rel="stylesheet" href="../../css/reservation.css">
-  <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
-</head>
 
-<style>
-.btn1{
-	margin-right:50px
-}
-</style>
-
-
-<body>
-
-<div class = "header">
-  <h1>The Continental Library</h1>
-</div>
-
-<div class="body">
+@section('content')
   <h2>Reservation Information</h2>
 
   @if ($reservation)
@@ -34,7 +12,7 @@
         </tr>
         <tr>
           <td>Room:</td>
-          <td>{{$reservation->room_id}}</td>
+          <td>{{$room_no}}</td>
         </tr>
         <tr>
           <td>Date:</td>
@@ -54,7 +32,7 @@
       <button class = "button button" type="submit">
         Delete
       </button>
-      <button class = "button button" onclick="window.location.href =` {{ route('startPage') }} `">
+      <button type="button" class = "button button" onclick="window.location.href =` {{ route('startPage') }} `">
         Home
       </button>
     </form>
@@ -65,8 +43,4 @@
       Home
     </button>
   @endif
-</div>
-
-
-</body>
-</html>
+@endsection
