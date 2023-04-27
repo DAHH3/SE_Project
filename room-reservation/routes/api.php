@@ -16,7 +16,7 @@ use App\Http\Controllers\ReservationController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
+/*
 // WORKS
 Route::get('/rooms', [RoomController::class, 'indexAPI']);
 
@@ -46,7 +46,7 @@ Route::post('/reservations/find', [ReservationController::class, 'findReservatio
 
 // WORKS
 Route::get('/reservations/{reservation_id}/room', [ReservationController::class, 'getRoomFromReservation']);
-
+*/
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

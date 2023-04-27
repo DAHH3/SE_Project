@@ -12,7 +12,7 @@
         </tr>
         <tr>
           <td>Room:</td>
-          <td>{{$reservation->room_id}}</td>
+          <td>{{$room_no}}</td>
         </tr>
         <tr>
           <td>Date:</td>
@@ -32,7 +32,7 @@
       <button class = "button button" type="submit">
         Delete
       </button>
-      <button class = "button button" onclick="window.location.href =` {{ route('startPage') }} `">
+      <button type="button" class = "button button" onclick="window.location.href =` {{ route('startPage') }} `">
         Home
       </button>
     </form>

@@ -5,8 +5,9 @@
     <meta name="view" content = "width=device-width, initial-scale=1">
     <title>The Continential Library</title>
     <!-- FOR AWS -->
-    <!--<link rel="stylesheet" href="../../../room-reservation/public/css/reservation.css">-->
-    <link rel="stylesheet" href="../../css/reservation.css">
+    <link rel="stylesheet" href="../../../room-reservation/public/css/reservation.css">
+    <!-- FOR LOCAL-->
+    <!--<link rel="stylesheet" href="../../css/reservation.css">-->
     <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
 </head>
 <body>

@@ -15,7 +15,7 @@
             <input type="hidden" name="end_time" value="{{ $end_time }}">
             <table>
                 <tr>
-                    <th>Room {{ $room->id }}</th>
+                    <th>Room {{ $room->room_no }}</th>
                 </tr>
                 <tr>
                     <td>Capacity: {{ $room->capacity }}</td>

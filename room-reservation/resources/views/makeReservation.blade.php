@@ -10,7 +10,7 @@
         </tr>
         <tr>
           <td>Room:</td>
-          <td>{{$room->id}}</td>
+          <td>{{$room->room_no}}</td>
         </tr>
         <tr>
           <td>Date:</td>
@@ -26,7 +26,7 @@
     <div class="container">
         <table>
             <tr>
-                <th>Room {{ $room->id }}</th>
+                <th>Room {{ $room->room_no }}</th>
             </tr>
             <tr>
                 <td>Capacity: {{ $room->capacity }}</td>

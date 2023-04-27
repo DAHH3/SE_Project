@@ -94,7 +94,11 @@ class ReservationController extends Controller
             $reservation->room()->associate($room);
 
             $reservation->save();
-            return redirect()->route('reservationShow', $reservation->id);
+            return view('reservationInformation', [
+                'reservation' => $reservation,
+                'room_no' => $room->room_no
+            ]);
+            // return redirect()->route('reservationShow', [$reservation->id, ]);
         }
         else {
             return redirect()->back()->withErrors('Room already reserved during that time');
@@ -242,9 +246,20 @@ class ReservationController extends Controller
             ->where('email', '=', $email)
             ->where('pin', '=', $pin)
             ->first();
+        
+        if ($reservation) {
+            $room = DB::table('rooms')
+            ->where('id', '=', $reservation->room_id)
+            ->first();
+            $room_no = $room->room_no;
+        }
+        else {
+            $room_no = 0;
+        }
 
         return view('reservationInformation', [
-            'reservation' => $reservation
+            'reservation' => $reservation,
+            'room_no' => $room_no
         ]);
     }
 
