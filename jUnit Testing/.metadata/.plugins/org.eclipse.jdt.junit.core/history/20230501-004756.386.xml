@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="MakeReservation" project="Continental_jUnit_Testing" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="continental_jUnit_Testing.MakeReservation" time="67.857" displayname="MakeReservation" uniqueid="[engine:junit-vintage]/[runner:continental_jUnit_Testing.MakeReservation]">
+    <testcase name="testMakeReservation" classname="continental_jUnit_Testing.MakeReservation" time="67.857" displayname="testMakeReservation" uniqueid="[engine:junit-vintage]/[runner:continental_jUnit_Testing.MakeReservation]/[test:testMakeReservation(continental_jUnit_Testing.MakeReservation)]"/>
+  </testsuite>
+</testrun>
