@@ -18,7 +18,7 @@
         </tr>
         <tr>
           <td>Time:</td>
-          <td>{{$start_time}} to {{$end_time}}</td>
+          <td>{{ $start_time }} to {{$end_time}}</td>
         </tr>
       </table>
     </div>

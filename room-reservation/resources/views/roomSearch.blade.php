@@ -12,7 +12,7 @@
             </tr>
             <tr>
                 <td>
-                    <input type="checkbox" id="handicap_accessible" value="handicap_accessible" name="handicap_accessible">
+                    <input type="checkbox" id="handicap_accessible" value="1" name="handicap_accessible">
                     <label for="handicap_accessible">Handicap Accessible</label>
                 </td>
                 <td>
@@ -27,7 +27,7 @@
             </tr>
             <tr>
                 <td>
-                    <input type="checkbox" id="wifi" value="wifi" name="wifi">
+                    <input type="checkbox" id="wifi" value="1" name="wifi">
                     <label for="wifi">Wifi</label>
                 </td>
                 <td>
@@ -39,7 +39,7 @@
             </tr>
             <tr>
                 <td>
-                    <input type="checkbox" id="whiteboard" value="whiteboard" name="whiteboard">
+                    <input type="checkbox" id="whiteboard" value="1" name="whiteboard">
                     <label for="whiteboard">Whiteboard</label><br><br>
                 </td>
                 <td>
@@ -54,7 +54,7 @@
             </tr>
             <tr>
                 <td>
-                    <input type="number" id="capacity" value="capacity" min="1" max="15" name="capacity">
+                    <input type="number" id="capacity" value="1" min="1" max="15" name="capacity">
                     <label for="capacity">Capacity</label>
                 </td>
             </tr>

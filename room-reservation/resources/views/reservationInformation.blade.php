@@ -20,13 +20,12 @@
         </tr>
         <tr>
           <td>Time:</td>
-          <td>{{$reservation->start_time}} to {{$reservation->end_time}}</td>
+          <td>{{substr($reservation->start_time, 0, 5)}} to {{substr($reservation->end_time, 0, 5)}}</td>
         </tr>
       </table>
     </div>
   
-    <!--  /*TODO: Add Delete Message to delete button*/-->
-    <form action="/reservations/delete" method="post">
+    <form action="delete" method="post">
       @csrf
       <input type="hidden" name="reservation_id" value="{{ $reservation->id }}">
       <button class = "button button" type="submit">
