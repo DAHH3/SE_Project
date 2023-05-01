@@ -22,7 +22,7 @@ public class DeleteReservation {
   JavascriptExecutor js;
   @Before
   public void setUp() throws Exception {
-    System.setProperty("webdriver.chrome.driver", "C:\\Users\\Hap\\Desktop\\selenium testing\\project_webapp_testing\\lib\\chromedriver.exe");
+    System.setProperty("webdriver.chrome.driver", "C:\\Users\\Hap\\Desktop\\SE-Repo-Clone\\SE_Project\\jUnit Testing\\Continental_jUnit_Testing\\lib\\chromedriver.exe");
     driver = new ChromeDriver();
     baseUrl = "https://www.google.com/";
     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
@@ -31,25 +31,72 @@ public class DeleteReservation {
 
   @Test
   public void testDeleteReservation() throws Exception {
-    driver.get("http://ec2-18-119-119-30.us-east-2.compute.amazonaws.com/room-reservation/public/");
-    //ERROR: Caught exception [unknown command []]
-    Thread.sleep(1500);
-    driver.findElement(By.xpath("//button[@onclick='window.location.href =` http://ec2-18-119-119-30.us-east-2.compute.amazonaws.com/room-reservation/public/reservations `']")).click();
-    //ERROR: Caught exception [unknown command []]
-    Thread.sleep(1500);
-    driver.findElement(By.id("email")).click();
-    driver.findElement(By.id("email")).clear();
-    driver.findElement(By.id("email")).sendKeys("jdough@gmail.com");
-    driver.findElement(By.id("pin")).click();
-    driver.findElement(By.id("pin")).clear();
-    driver.findElement(By.id("pin")).sendKeys("1223");
-    driver.findElement(By.xpath("//button[@type='submit']")).click();
-    //ERROR: Caught exception [unknown command []]
-    Thread.sleep(1500);
-    driver.findElement(By.xpath("//button[@type='submit']")).click();
-    Thread.sleep(1500);
-    driver.findElement(By.xpath("//button[@onclick='window.location.href =` http://ec2-18-119-119-30.us-east-2.compute.amazonaws.com/room-reservation/public/reservations `']")).click();
-    //ERROR: Caught exception [unknown command []]
+    
+		driver.get("http://ec2-18-119-119-30.us-east-2.compute.amazonaws.com/room-reservation/public/");
+		Thread.sleep(1500);
+		driver.findElement(By.xpath("//button[@onclick='window.location.href = `http://ec2-18-119-119-30.us-east-2.compute.amazonaws.com/room-reservation/public/rooms `']")).click();
+		Thread.sleep(1500);
+		driver.get("http://ec2-18-119-119-30.us-east-2.compute.amazonaws.com/room-reservation/public/rooms");
+	    driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Date/Time'])[1]/following::label[1]")).click();
+	    Thread.sleep(1500);
+	    driver.findElement(By.id("date")).click();
+	    driver.findElement(By.id("date")).clear();
+	    Thread.sleep(1500);
+	    driver.findElement(By.id("date")).sendKeys(Keys.ARROW_LEFT, Keys.ARROW_LEFT, "12-12-2024");
+	    driver.findElement(By.id("start_time")).click();
+	    driver.findElement(By.id("start_time")).clear();
+	    Thread.sleep(1500);
+	    driver.findElement(By.id("start_time")).sendKeys("13:00");
+	    driver.findElement(By.id("end_time")).click();
+	    driver.findElement(By.id("end_time")).clear();
+	    Thread.sleep(1500);
+	    driver.findElement(By.id("end_time")).sendKeys("14:00");
+	    driver.findElement(By.id("capacity")).clear();
+	    driver.findElement(By.id("capacity")).sendKeys("2");
+	    driver.findElement(By.id("capacity")).click();
+	    driver.findElement(By.id("capacity")).clear();
+	    driver.findElement(By.id("capacity")).sendKeys("3");
+	    driver.findElement(By.id("capacity")).click();
+	    Thread.sleep(1500);
+	    driver.findElement(By.xpath("//button[@type='submit']")).click();
+	    Thread.sleep(1500);
+	    driver.findElement(By.xpath("//button[@type='submit']")).click();
+	    Thread.sleep(1500);
+	    driver.get("http://ec2-18-119-119-30.us-east-2.compute.amazonaws.com/room-reservation/public/reservations/create");
+	    Thread.sleep(1500);
+	    driver.findElement(By.id("email")).click();
+	    driver.findElement(By.id("email")).clear();
+	    Thread.sleep(1500);
+	    driver.findElement(By.id("email")).sendKeys("jdough@gmail.com");
+	    driver.findElement(By.id("pin")).click();
+	    driver.findElement(By.id("pin")).clear();
+	    Thread.sleep(1500);
+	    driver.findElement(By.id("pin")).sendKeys("1223");
+	    //driver.findElement(By.xpath("//button[@type='submit']")).click();
+	    Thread.sleep(1500);
+	    //driver.get("http://ec2-18-119-119-30.us-east-2.compute.amazonaws.com/room-reservation/public/reservations");
+	    //ERROR: Caught exception [unknown command []]
+	    Thread.sleep(1500);
+	    driver.findElement(By.xpath("//button[@type='button']")).click();
+	    Thread.sleep(1500);
+	    driver.get("http://ec2-18-119-119-30.us-east-2.compute.amazonaws.com/room-reservation/public/");
+	    Thread.sleep(1500);
+	    driver.findElement(By.xpath("//button[@onclick='window.location.href =` http://ec2-18-119-119-30.us-east-2.compute.amazonaws.com/room-reservation/public/reservations `']")).click();
+	    driver.findElement(By.id("email")).click();
+	    driver.findElement(By.id("email")).clear();
+	    Thread.sleep(1500);
+	    driver.findElement(By.id("email")).sendKeys("jdough@gmail.com");
+	    driver.findElement(By.id("pin")).click();
+	    driver.findElement(By.id("pin")).clear();
+	    Thread.sleep(1500);
+	    driver.findElement(By.id("pin")).sendKeys("1223");
+	    Thread.sleep(1500);
+	    driver.findElement(By.xpath("//button[@type='submit']")).click();
+	    Thread.sleep(1500);
+	    driver.findElement(By.xpath("//button[@type='submit']")).click();
+	    Thread.sleep(1500); 
+	    
+
     Thread.sleep(1500);
     driver.findElement(By.id("email")).click();
     driver.findElement(By.id("email")).clear();

@@ -22,7 +22,7 @@ public class FindWithoutEmailError {
   JavascriptExecutor js;
   @Before
   public void setUp() throws Exception {
-    System.setProperty("webdriver.chrome.driver", "C:\\Users\\Hap\\Desktop\\selenium testing\\project_webapp_testing\\lib\\chromedriver.exe");
+    System.setProperty("webdriver.chrome.driver", "C:\\Users\\Hap\\Desktop\\SE-Repo-Clone\\SE_Project\\jUnit Testing\\Continental_jUnit_Testing\\lib\\chromedriver.exe");
     driver = new ChromeDriver();
     baseUrl = "https://www.google.com/";
     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
@@ -43,6 +43,7 @@ public class FindWithoutEmailError {
     driver.findElement(By.xpath("//button[@type='submit']")).click();
     Thread.sleep(1500);
     //ERROR: Caught exception [unknown command []]
+   
   }
 
   @After

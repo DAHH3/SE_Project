@@ -12,8 +12,6 @@ import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.time.Duration;
 
-//TESTED: ALL CLEAR
-
 public class MakeReservation {
   private WebDriver driver;
   private String baseUrl;
@@ -22,7 +20,7 @@ public class MakeReservation {
   JavascriptExecutor js;
   @Before
   public void setUp() throws Exception {
-    System.setProperty("webdriver.chrome.driver", "C:\\Users\\Hap\\Desktop\\selenium testing\\project_webapp_testing\\lib\\chromedriver.exe");
+    System.setProperty("webdriver.chrome.driver", "C:\\Users\\Hap\\Desktop\\SE-Repo-Clone\\SE_Project\\jUnit Testing\\Continental_jUnit_Testing\\lib\\chromedriver.exe");
     driver = new ChromeDriver();
     baseUrl = "https://www.google.com/";
     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
@@ -31,57 +29,76 @@ public class MakeReservation {
 
   @Test
   public void testMakeReservation() throws Exception {
-    //ERROR: Caught exception [unknown command []]
-    driver.get("http://ec2-18-119-119-30.us-east-2.compute.amazonaws.com/room-reservation/public/");
-    driver.findElement(By.xpath("//button[@onclick='window.location.href = `http://ec2-18-119-119-30.us-east-2.compute.amazonaws.com/room-reservation/public/rooms `']")).click();
-    //ERROR: Caught exception [unknown command []]
-    Thread.sleep(1500);
-    driver.findElement(By.id("handicap_accessible")).click();
-    driver.findElement(By.id("wifi")).click();
-    driver.findElement(By.id("date")).click();
-    driver.findElement(By.id("date")).clear();
-    Thread.sleep(1500);
-
-    driver.findElement(By.id("date")).sendKeys(Keys.ARROW_LEFT, Keys.ARROW_LEFT, "12-12-2023");
-    //ERROR: Caught exception [unknown command []]
-    Thread.sleep(1500);
-    driver.findElement(By.id("start_time")).click();
-    driver.findElement(By.id("start_time")).clear();
-    Thread.sleep(1500);
-    driver.findElement(By.id("start_time")).sendKeys("09:00AM");
-    driver.findElement(By.id("end_time")).click();
-    driver.findElement(By.id("end_time")).clear();
-    driver.findElement(By.id("end_time")).sendKeys("15:30");
-    Thread.sleep(1500);
-    //ERROR: Caught exception [unknown command []]
-    driver.findElement(By.id("capacity")).clear();
-    driver.findElement(By.id("capacity")).sendKeys("2");
-    driver.findElement(By.id("capacity")).click();
-    driver.findElement(By.id("capacity")).clear();
-    driver.findElement(By.id("capacity")).sendKeys("3");
-    driver.findElement(By.id("capacity")).click();
-    Thread.sleep(1500);
-    //ERROR: Caught exception [unknown command []]
-    driver.findElement(By.xpath("//button[@type='submit']")).click();
-    //ERROR: Caught exception [unknown command []]
-    driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='✓ Whiteboard Available'])[2]/following::button[1]")).click();
-    Thread.sleep(1500);
-    driver.findElement(By.id("email")).click();
-    driver.findElement(By.id("email")).clear();
-    Thread.sleep(1500);
-    driver.findElement(By.id("email")).sendKeys("jdough@gmail.com");
-    driver.findElement(By.id("pin")).click();
-    driver.findElement(By.id("pin")).clear();
-    Thread.sleep(1500);
-    driver.findElement(By.id("pin")).sendKeys("1223");
-    Thread.sleep(1500);
-    //ERROR: Caught exception [unknown command []]
-    driver.findElement(By.xpath("//button[@type='submit']")).click();
-    Thread.sleep(1500);
-    //ERROR: Caught exception [unknown command []]
-    driver.findElement(By.xpath("//button[@type='button']")).click();
-    //ERROR: Caught exception [unknown command []]
-    Thread.sleep(1500);
+	    driver.get("http://ec2-18-119-119-30.us-east-2.compute.amazonaws.com/room-reservation/public/");
+	    Thread.sleep(1500);
+	    driver.findElement(By.xpath("//button[@onclick='window.location.href = `http://ec2-18-119-119-30.us-east-2.compute.amazonaws.com/room-reservation/public/rooms `']")).click();
+	    driver.findElement(By.id("date")).click();
+	    driver.findElement(By.id("date")).clear();
+	    Thread.sleep(1500);
+	    driver.findElement(By.id("date")).sendKeys(Keys.ARROW_LEFT, Keys.ARROW_LEFT, "12-12-2023");
+	    Thread.sleep(1500);
+	    driver.findElement(By.id("start_time")).click();
+	    driver.findElement(By.id("start_time")).clear();
+	    driver.findElement(By.id("start_time")).sendKeys("13:00");
+	    Thread.sleep(1500);
+	    driver.findElement(By.id("end_time")).click();
+	    driver.findElement(By.id("end_time")).clear();
+	    Thread.sleep(1500);
+	    driver.findElement(By.id("end_time")).sendKeys("14:00");
+	    driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Start Time:'])[1]/following::label[1]")).click();
+	    driver.findElement(By.id("capacity")).clear();
+	    driver.findElement(By.id("capacity")).sendKeys("2");
+	    driver.findElement(By.id("capacity")).click();
+	    driver.findElement(By.id("capacity")).clear();
+	    Thread.sleep(1500);
+	    driver.findElement(By.id("capacity")).sendKeys("3");
+	    driver.findElement(By.id("capacity")).click();
+	    //ERROR: Caught exception [ERROR: Unsupported command [doubleClick | id=capacity | ]]
+	    driver.findElement(By.xpath("//button[@type='submit']")).click();
+	    Thread.sleep(1500);
+	    driver.findElement(By.xpath("//button[@type='submit']")).click();
+	    Thread.sleep(1500);
+	    driver.findElement(By.id("email")).click();
+	    driver.findElement(By.id("email")).clear();
+	    Thread.sleep(1500);
+	    driver.findElement(By.id("email")).sendKeys("jdough@gmail.com");
+	    driver.findElement(By.id("pin")).click();
+	    driver.findElement(By.id("pin")).clear();
+	    Thread.sleep(1500);
+	    driver.findElement(By.id("pin")).sendKeys("1223");
+	    Thread.sleep(1500);
+	    driver.findElement(By.xpath("//button[@type='submit']")).click();
+	    Thread.sleep(1500);
+	    String res_room = (String)driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Room:'])[1]/following::td[1]")).getText();
+	    String res_date = (String)driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Date:'])[1]/following::td[1]")).getText();
+	    String res_time = (String)driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Time:'])[1]/following::td[1]")).getText();
+	    //ERROR: Caught exception [unknown command []]
+	    driver.findElement(By.xpath("//button[@type='button']")).click();
+	    Thread.sleep(1500);
+	    driver.findElement(By.xpath("//button[@onclick='window.location.href =` http://ec2-18-119-119-30.us-east-2.compute.amazonaws.com/room-reservation/public/reservations `']")).click();
+	    Thread.sleep(1500);
+	    driver.findElement(By.id("email")).click();
+	    driver.findElement(By.id("email")).clear();
+	    driver.findElement(By.id("email")).sendKeys("jdough@gmail.com");
+	    Thread.sleep(1500);
+	    driver.findElement(By.id("pin")).click();
+	    driver.findElement(By.id("pin")).clear();
+	    driver.findElement(By.id("pin")).sendKeys("1223");
+	    Thread.sleep(1500);
+	    driver.findElement(By.xpath("//button[@type='submit']")).click();
+	    Thread.sleep(1500);
+	    String show_room = (String)driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Room:'])[1]/following::td[1]")).getText();
+	    String show_date = (String)driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Date:'])[1]/following::td[1]")).getText();
+	    String show_time = (String)driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Time:'])[1]/following::td[1]")).getText();
+	    //ERROR: Caught exception [unknown command []]
+	    
+	    Assert.assertEquals(res_room, show_room);
+	    Assert.assertEquals(res_date, show_date);
+	    Assert.assertEquals(res_time, show_time);
+	    
+	    //ERROR: Caught exception [unknown command []]
+	    driver.findElement(By.xpath("//button[@type='submit']")).click();
+	    Thread.sleep(1500);
   }
 
   @After
