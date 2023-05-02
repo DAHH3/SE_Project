@@ -64,7 +64,7 @@ public class FindReservation {
     driver.findElement(By.id("email")).click();
     driver.findElement(By.id("email")).clear();
     Thread.sleep(1500);
-    driver.findElement(By.id("email")).sendKeys("jdough@gmail.com");
+    driver.findElement(By.id("email")).sendKeys("bjoel@gmail.com");
     driver.findElement(By.id("pin")).click();
     driver.findElement(By.id("pin")).clear();
     Thread.sleep(1500);
@@ -82,7 +82,7 @@ public class FindReservation {
     Thread.sleep(1500);
     driver.findElement(By.id("email")).click();
     driver.findElement(By.id("email")).clear();
-    driver.findElement(By.id("email")).sendKeys("jdough@gmail.com");
+    driver.findElement(By.id("email")).sendKeys("bjoel@gmail.com");
     Thread.sleep(1500);
     driver.findElement(By.id("pin")).click();
     driver.findElement(By.id("pin")).clear();
