@@ -23,7 +23,8 @@ public class MakeReservationWithoutEmail {
   JavascriptExecutor js;
   @Before
   public void setUp() throws Exception {
-    System.setProperty("webdriver.chrome.driver", "C:\\Users\\Hap\\Desktop\\SE-Repo-Clone\\SE_Project\\jUnit Testing\\Continental_jUnit_Testing\\lib\\chromedriver.exe");
+	// System.setProperty("webdriver.chrome.driver", "C:\\Users\\Hap\\Desktop\\SE-Repo-Clone\\SE_Project\\jUnit Testing\\Continental_jUnit_Testing\\lib\\chromedriver.exe");
+	System.setProperty("webdriver.chrome.driver", "lib/mac/chromedriver");
     driver = new ChromeDriver();
     baseUrl = "https://www.google.com/";
     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
@@ -49,10 +50,12 @@ public class MakeReservationWithoutEmail {
     driver.findElement(By.id("date")).sendKeys(Keys.ARROW_LEFT, Keys.ARROW_LEFT, "12-12-2024");
     driver.findElement(By.id("start_time")).clear();
     Thread.sleep(1500);
+    driver.findElement(By.id("start_time")).sendKeys(Keys.ARROW_LEFT);
     driver.findElement(By.id("start_time")).sendKeys("13:00");
     driver.findElement(By.id("end_time")).click();
     driver.findElement(By.id("end_time")).clear();
     Thread.sleep(1500);
+    driver.findElement(By.id("end_time")).sendKeys(Keys.ARROW_LEFT);
     driver.findElement(By.id("end_time")).sendKeys("14:00");
     //ERROR: Caught exception [unknown command []]
     Thread.sleep(1500);

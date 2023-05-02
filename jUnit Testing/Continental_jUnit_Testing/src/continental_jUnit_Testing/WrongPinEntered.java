@@ -20,7 +20,8 @@ public class WrongPinEntered {
   JavascriptExecutor js;
   @Before
   public void setUp() throws Exception {
-    System.setProperty("webdriver.chrome.driver", "C:\\Users\\Hap\\Desktop\\SE-Repo-Clone\\SE_Project\\jUnit Testing\\Continental_jUnit_Testing\\lib\\chromedriver.exe");
+	// System.setProperty("webdriver.chrome.driver", "C:\\Users\\Hap\\Desktop\\SE-Repo-Clone\\SE_Project\\jUnit Testing\\Continental_jUnit_Testing\\lib\\chromedriver.exe");
+	System.setProperty("webdriver.chrome.driver", "lib/mac/chromedriver");
     driver = new ChromeDriver();
     baseUrl = "https://www.google.com/";
     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
@@ -36,10 +37,12 @@ public class WrongPinEntered {
     driver.findElement(By.id("date")).sendKeys(Keys.ARROW_LEFT, Keys.ARROW_LEFT, "12-12-2024");
     driver.findElement(By.id("start_time")).click();
     driver.findElement(By.id("start_time")).clear();
+    driver.findElement(By.id("start_time")).sendKeys(Keys.ARROW_LEFT);
     driver.findElement(By.id("start_time")).sendKeys("09:00AM");
     driver.findElement(By.id("end_time")).click();
     driver.findElement(By.id("end_time")).click();
     driver.findElement(By.id("end_time")).clear();
+    driver.findElement(By.id("end_time")).sendKeys(Keys.ARROW_LEFT);
     driver.findElement(By.id("end_time")).sendKeys("10:00AM");
     driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Start Time:'])[1]/following::label[1]")).click();
     driver.findElement(By.xpath("//button[@type='submit']")).click();

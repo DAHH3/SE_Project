@@ -20,7 +20,8 @@ public class NoDoubleBooking {
   JavascriptExecutor js;
   @Before
   public void setUp() throws Exception {
-    System.setProperty("webdriver.chrome.driver", "C:\\Users\\Hap\\Desktop\\SE-Repo-Clone\\SE_Project\\jUnit Testing\\Continental_jUnit_Testing\\lib\\chromedriver.exe");
+	// System.setProperty("webdriver.chrome.driver", "C:\\Users\\Hap\\Desktop\\SE-Repo-Clone\\SE_Project\\jUnit Testing\\Continental_jUnit_Testing\\lib\\chromedriver.exe");
+	System.setProperty("webdriver.chrome.driver", "lib/mac/chromedriver");
     driver = new ChromeDriver();
     baseUrl = "https://www.google.com/";
     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
@@ -41,10 +42,12 @@ public class NoDoubleBooking {
     Thread.sleep(1500);
     driver.findElement(By.id("start_time")).click();
     driver.findElement(By.id("start_time")).clear();
+    driver.findElement(By.id("start_time")).sendKeys(Keys.ARROW_LEFT);
     driver.findElement(By.id("start_time")).sendKeys("13:00");
     Thread.sleep(1500);
     driver.findElement(By.id("end_time")).click();
     driver.findElement(By.id("end_time")).clear();
+    driver.findElement(By.id("end_time")).sendKeys(Keys.ARROW_LEFT);
     driver.findElement(By.id("end_time")).sendKeys("14:00");
     Thread.sleep(1500);
     driver.findElement(By.id("whiteboard")).click();
@@ -87,10 +90,12 @@ public class NoDoubleBooking {
     driver.findElement(By.id("date")).sendKeys(Keys.ARROW_LEFT, Keys.ARROW_LEFT, "12-12-2023");
     driver.findElement(By.id("start_time")).click();
     driver.findElement(By.id("start_time")).clear();
+    driver.findElement(By.id("start_time")).sendKeys(Keys.ARROW_LEFT);
     driver.findElement(By.id("start_time")).sendKeys("13:00");
     Thread.sleep(1500);
     driver.findElement(By.id("end_time")).click();
     driver.findElement(By.id("end_time")).clear();
+    driver.findElement(By.id("end_time")).sendKeys(Keys.ARROW_LEFT);
     driver.findElement(By.id("end_time")).sendKeys("14:00");
     Thread.sleep(1500);
     driver.findElement(By.id("whiteboard")).click();

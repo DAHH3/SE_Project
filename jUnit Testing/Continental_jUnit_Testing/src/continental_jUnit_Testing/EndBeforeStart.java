@@ -22,7 +22,7 @@ public class EndBeforeStart {
   JavascriptExecutor js;
   @Before
   public void setUp() throws Exception {
-    System.setProperty("webdriver.chrome.driver", "C:\\Users\\Hap\\Desktop\\SE-Repo-Clone\\SE_Project\\jUnit Testing\\Continental_jUnit_Testing\\lib\\chromedriver.exe");
+	System.setProperty("webdriver.chrome.driver", "lib/mac/chromedriver");
     driver = new ChromeDriver();
     baseUrl = "https://www.google.com/";
     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
@@ -37,10 +37,12 @@ public class EndBeforeStart {
     driver.findElement(By.xpath("//button[@onclick='window.location.href = `http://ec2-18-119-119-30.us-east-2.compute.amazonaws.com/room-reservation/public/rooms `']")).click();
     driver.findElement(By.id("start_time")).click();
     driver.findElement(By.id("start_time")).clear();
+    driver.findElement(By.id("start_time")).sendKeys(Keys.ARROW_LEFT);
     driver.findElement(By.id("start_time")).sendKeys("16:00");
     Thread.sleep(1500);
     driver.findElement(By.id("end_time")).click();
     driver.findElement(By.id("end_time")).clear();
+    driver.findElement(By.id("end_time")).sendKeys(Keys.ARROW_LEFT);
     driver.findElement(By.id("end_time")).sendKeys("15:00");
     //ERROR: Caught exception [unknown command []]
     Thread.sleep(1500);
