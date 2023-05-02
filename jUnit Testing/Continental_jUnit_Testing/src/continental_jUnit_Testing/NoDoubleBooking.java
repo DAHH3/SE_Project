@@ -121,7 +121,7 @@ public class NoDoubleBooking {
     driver.findElement(By.id("email")).click();
     driver.findElement(By.id("email")).clear();
     Thread.sleep(1500);
-    driver.findElement(By.id("email")).sendKeys("jdough@gmail.com");
+    driver.findElement(By.id("email")).sendKeys("sdan@gmail.com");
     driver.findElement(By.id("pin")).click();
     driver.findElement(By.id("pin")).clear();
     Thread.sleep(1500);
@@ -135,7 +135,7 @@ public class NoDoubleBooking {
     driver.findElement(By.xpath("//button[@onclick='window.location.href =` http://ec2-18-119-119-30.us-east-2.compute.amazonaws.com/room-reservation/public/reservations `']")).click();
     driver.findElement(By.id("email")).click();
     driver.findElement(By.id("email")).clear();
-    driver.findElement(By.id("email")).sendKeys("jdough@gmail.com");
+    driver.findElement(By.id("email")).sendKeys("sdan@gmail.com");
     driver.findElement(By.id("pin")).click();
     driver.findElement(By.id("pin")).clear();
     driver.findElement(By.id("pin")).sendKeys("1223");
@@ -146,7 +146,7 @@ public class NoDoubleBooking {
     driver.findElement(By.xpath("//button[@onclick='window.location.href =` http://ec2-18-119-119-30.us-east-2.compute.amazonaws.com/room-reservation/public/reservations `']")).click();
     driver.findElement(By.id("email")).click();
     driver.findElement(By.id("email")).clear();
-    driver.findElement(By.id("email")).sendKeys("jdough@gmail.com");
+    driver.findElement(By.id("email")).sendKeys("sdan@gmail.com");
     driver.findElement(By.id("pin")).click();
     driver.findElement(By.id("pin")).clear();
     driver.findElement(By.id("pin")).sendKeys("1223");
