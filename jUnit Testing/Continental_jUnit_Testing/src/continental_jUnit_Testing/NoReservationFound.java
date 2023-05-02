@@ -40,7 +40,7 @@ public class NoReservationFound {
     driver.findElement(By.id("email")).click();
     driver.findElement(By.id("email")).clear();
     Thread.sleep(1500);
-    driver.findElement(By.id("email")).sendKeys("jdough@gmail.com");
+    driver.findElement(By.id("email")).sendKeys("ejohn@gmail.com");
     Thread.sleep(1500);
     driver.findElement(By.id("pin")).click();
     driver.findElement(By.id("pin")).clear();
